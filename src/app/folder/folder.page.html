@@ -9,13 +9,30 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
+    <ion-toolbar>	  
+		<form [formGroup]="intentSenderForm" (ngSubmit)="sendIntent()"  novalidate>
+			Send New Intent
+			<ion-list lines="none">
+				<ion-item>
+					<ion-input style="margin-left: 10px;"  maxlength="11" formControlName="phone" placeholder="08012345678" type="tel"></ion-input>
+				</ion-item>			
+				<ion-item>
+					<ion-input placeholder="Name" type="text" required formControlName="name"></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-button size="medium" color="primary" type="submit">Send Intent</ion-button>
+				</ion-item>
+			</ion-list>
+		</form>
+
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <strong class="capitalize">Devpitch Tech.</strong>
+    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://devpitch.com.ng">Visit our website</a></p>
   </div>
+
+
 </ion-content>
