@@ -2,6 +2,15 @@ ion-menu-button {
   color: var(--ion-color-primary);
 }
 
+.center {
+	text-align: center;
+}
+
+.form {
+	text-align: center;
+    margin-top: 35%;
+    position: initial;
+}
 #container {
   text-align: center;
   position: absolute;
@@ -25,4 +34,12 @@ ion-menu-button {
 
 #container a {
   text-decoration: none;
+}
+
+.intent-data {
+	background-color: lightgray;
+    border: 1px solid var(--ion-color-primary);
+    margin: 15px;
+    border-radius: 9px;
+    padding: 3px;
 }

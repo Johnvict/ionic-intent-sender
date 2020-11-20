@@ -3,36 +3,56 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>SENDER</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>	  
-		<form [formGroup]="intentSenderForm" (ngSubmit)="sendIntent()"  novalidate>
-			Send New Intent
-			<ion-list lines="none">
-				<ion-item>
-					<ion-input style="margin-left: 10px;"  maxlength="11" formControlName="phone" placeholder="08012345678" type="tel"></ion-input>
-				</ion-item>			
-				<ion-item>
-					<ion-input placeholder="Name" type="text" required formControlName="name"></ion-input>
-				</ion-item>
 
-				<ion-item>
-					<ion-button size="medium" color="primary" type="submit">Send Intent</ion-button>
-				</ion-item>
-			</ion-list>
-		</form>
-
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong class="capitalize">Devpitch Tech.</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://devpitch.com.ng">Visit our website</a></p>
+<div class="form">
+	<form [formGroup]="intentSenderForm" (ngSubmit)="sendIntent()"  novalidate>
+		<ion-text color="primary" size="medium"><b>Send New Intent</b></ion-text>
+		<ion-row class="ion-justify-content-around">
+			<ion-col size="8">
+				<ion-list>
+					<ion-item>
+						<ion-input style="margin-left: 10px;"  maxlength="11" formControlName="phone" placeholder="08012345678" type="tel"></ion-input>
+					</ion-item>			
+					<ion-item>
+						<ion-input placeholder="Name" type="text" required formControlName="name"></ion-input>
+					</ion-item>
+			
+					<br><br>
+					<ion-button expand="full" size="medium" color="primary" type="submit">Send Intent</ion-button>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</form>
   </div>
 
+  <div class="intent-data" *ngIf="intentResponseReceived">
+		<ion-list>
+			<ion-item>
+				Name: {{ intentResponse?.name }}
+			</ion-item>
+			<ion-item>
+				Reference: {{ intentResponse?.eventReference }}
+			</ion-item>
+			<ion-item>
+				Phone No: {{ intentResponse?.phone }}
+			</ion-item>
+			<ion-item>
+				Amount: {{ intentResponse?.amount }}
+			</ion-item>
+			<ion-item>
+				Payment Status: {{ intentResponse?.paid ? 'Paid' : 'Not Paid' }}
+			</ion-item>
+		</ion-list>
+	</div>
 
+	<br><br>
+	<div class="center">
+		<strong class="capitalize">Devpitch Tech.</strong>
+		<p><a target="_blank" rel="noopener noreferrer" href="https://devpitch.com.ng">Visit our website</a></p>
+	</div>
 </ion-content>
