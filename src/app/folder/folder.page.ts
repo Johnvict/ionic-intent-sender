@@ -35,12 +35,13 @@ export class FolderPage implements OnInit {
 	constructor(
 		private webIntent: WebIntent,
 		private alertCtrl: AlertController,
+		private platform: Platform,
 		private ngZone: NgZone) { }
 
 	ngOnInit() {
 		//
 		console.log('HEY onInit WORKS!');
-		this.registerReceiver();
+		this.platform.ready().then(_ => this.registerReceiver());
 	}
 
 	registerReceiver() {
@@ -79,17 +80,19 @@ export class FolderPage implements OnInit {
 			}
 		};
 
-		this.webIntent.startActivityForResult(options)
-			.then( _ => {
-				const onResponse = (result) => {
-					console.log('WE GOT RESULT');
-					console.log(result);
-				};
-				window.plugins.intentShim.onActivityResult(onResponse);
-				this.webIntent.onIntent().subscribe(onResponse);
+		this.platform.ready().then( _ => {
+			this.webIntent.startActivityForResult(options)
+				.then( _ => {
+					const onResponse = (result) => {
+						console.log('WE GOT RESULT');
+						console.log(result);
+					};
+					window.plugins.intentShim.onActivityResult(onResponse);
+					this.webIntent.onIntent().subscribe(onResponse);
 
-			})
-			.catch(error => this.showAltert(error));
+				})
+				.catch(error => this.showAltert(error));
+		});
 	}
 
 	async showAltert(message) {
